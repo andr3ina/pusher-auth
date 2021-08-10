@@ -56,7 +56,8 @@ app.post(config.ENDPOINT, (req, res) => {
   //
   const socketId = req.body.socket_id;
   const channelName = req.body.channel_name;
-
+  const user_id = req.cookies.user_id;
+  
   if (/^presence-/.test(channelName)) {
     // If the request is for a presence channel include some data about the user
     // in the call to authenticate
@@ -67,13 +68,8 @@ app.post(config.ENDPOINT, (req, res) => {
       //  name: 'Pusherino',
       //  twitter_id: '@pusher',
      // },
- //   };
-    
-    
-     const user_id = req.cookies.user_id;
-  const presenceData = { user_id };
-    
-    
+    let presenceData = { user_id };
+    };
     let auth = pusher.authenticate(socketId, channelName, presenceData);
     res.send(auth);
   } else {

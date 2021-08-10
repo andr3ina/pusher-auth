@@ -61,14 +61,14 @@ app.post(config.ENDPOINT, (req, res) => {
   if (/^presence-/.test(channelName)) {
     // If the request is for a presence channel include some data about the user
     // in the call to authenticate
-   // let timestamp = new Date().toISOString();
-   // let presenceData = {
-    //  user_id: `user-${timestamp}`,
-     // user_info: {
-      //  name: 'Pusherino',
-      //  twitter_id: '@pusher',
-     // },
-    let presenceData = { user_id };
+    let timestamp = new Date().toISOString();
+    let presenceData = {
+      user_id: `user-${timestamp}`,
+      user_info: {
+        name: 'Pusherino',
+        twitter_id: '@pusher',
+      },
+    //let presenceData = { user_id };
     };
     let auth = pusher.authenticate(socketId, channelName, presenceData);
     res.send(auth);
